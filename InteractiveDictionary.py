@@ -23,17 +23,18 @@ def searchInDic(string):
             print(cntr," - "+item)
             cntr += 1
         response = input("If yes press the number of the correct word \nElse press n: ")
-        if type(response) == int: # To make sure only numbers can be entered
-            response = int(response)
-            # Checking if the number entered by the user is correct
-            if response >= 1 and response <= len(get_close_matches(string, dictionary.keys())):
-                 return dictionary[get_close_matches(string, dictionary.keys())[response-1]]
-            else:
-                return "You entered wrong option."
-        elif response == 'n':
+        if response == 'n' or response == 'N':
             return "Word does not exist!"
         else:
-            return "You entered wrong input."
+            try:
+                response = int(response)
+                # Checking if the number entered by the user is correct
+                if response >= 1 and response <= len(get_close_matches(string, dictionary.keys())):
+                     return dictionary[get_close_matches(string, dictionary.keys())[response-1]]
+                else:
+                    return "You entered wrong option."
+            except:
+                return "You entered wrong input."
     else:
         return "Word doesn't exist!"
 
